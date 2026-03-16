@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Series Council | AI-Powered Time Series Analysis</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <style>
+        .announcement-banner {
+            background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
+            text-align: center;
+            padding: 0;
+            position: fixed;
+            top: 60px;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            overflow: hidden;
+        }
+        .announcement-banner a {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-family: 'Inter', sans-serif;
+            transition: opacity 0.2s;
+        }
+        .announcement-banner a:hover {
+            opacity: 0.85;
+        }
+        .announcement-pulse {
+            width: 8px;
+            height: 8px;
+            background: #4ade80;
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 4px #4ade80, 0 0 8px #4ade80; opacity: 1; }
+            50% { box-shadow: 0 0 12px #4ade80, 0 0 24px #4ade80; opacity: 0.7; }
+        }
+        .announcement-tag {
+            background: #4ade80;
+            color: #1a1a1a;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+            letter-spacing: 0.05em;
+        }
+        .announcement-text {
+            color: rgba(255,255,255,0.9);
+        }
+        .announcement-arrow {
+            font-size: 1.1rem;
+            transition: transform 0.2s;
+        }
+        .announcement-banner a:hover .announcement-arrow {
+            transform: translateX(4px);
+        }
+    </style>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                    <circle cx="14" cy="14" r="13" stroke="url(#logoGrad)" stroke-width="2"/>
+                    <path d="M7 18L11 10L15 15L19 8L22 12" stroke="url(#logoGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="11" cy="10" r="2" fill="#1a1a1a"/>
+                    <circle cx="19" cy="8" r="2" fill="#666666"/>
+                    <defs>
+                        <linearGradient id="logoGrad" x1="0" y1="0" x2="28" y2="28">
+                            <stop stop-color="#1a1a1a"/><stop offset="1" stop-color="#777777"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span>Time Series Council</span>
+            </a>
+            <div class="nav-links">
+                <a href="#architecture">Architecture</a>
+                <a href="#models">Models</a>
+                <a href="#council">Council</a>
+                <a href="#research">Research</a>
+                <a href="#team">Team</a>
+                <a href="https://openreview.net/forum?id=LycMKa0o0b" class="nav-btn" target="_blank">ICLR Paper</a>
+                <a href="https://github.com/salesforce/timeseries-council" class="nav-btn" target="_blank">GitHub</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ICLR Paper Announcement Banner -->
+    <div class="announcement-banner">
+        <a href="https://openreview.net/forum?id=LycMKa0o0b" target="_blank">
+            <span class="announcement-pulse"></span>
+            <span class="announcement-tag">NEW</span>
+            <span class="announcement-text">Our paper <strong>"Tune-as-Inference"</strong> has been accepted at <strong>ICLR 2026 TSALM Workshop</strong></span>
+            <span class="announcement-arrow">&rarr;</span>
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-bg">
+            <svg class="hero-wave" viewBox="0 0 1440 320" preserveAspectRatio="none">
+                <path fill="rgba(0,0,0,0.02)" d="M0,160L48,170.7C96,181,192,203,288,197.3C384,192,480,160,576,154.7C672,149,768,171,864,186.7C960,203,1056,213,1152,202.7C1248,192,1344,160,1392,144L1440,128V320H0Z"/>
+            </svg>
+            <div class="hero-particles" id="heroParticles"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge">Salesforce x IIIT-Hyderabad Research</div>
+            <h1 class="hero-title">
+                <span class="hero-title-line">Time Series</span>
+                <span class="hero-title-line gradient-text">Council</span>
+            </h1>
+            <p class="hero-subtitle">
+                An intelligent multi model ensemble system with LLM driven orchestration
+                for time series forecasting and anomaly detection in AIOps.
+            </p>
+            <div class="hero-actions">
+                <a href="#architecture" class="btn btn-primary">Explore Architecture</a>
+                <a href="#research" class="btn btn-secondary">View Research</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <svg viewBox="0 0 500 300" class="hero-chart" id="heroChart">
+                <defs>
+                    <linearGradient id="chartGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#1a1a1a" stop-opacity="0.3"/>
+                        <stop offset="100%" stop-color="#1a1a1a" stop-opacity="0"/>
+                    </linearGradient>
+                    <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#1a1a1a"/>
+                        <stop offset="100%" stop-color="#777777"/>
+                    </linearGradient>
+                    <filter id="glow">
+                        <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                        <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                    </filter>
+                </defs>
+                <!-- Grid lines -->
+                <line x1="50" y1="250" x2="480" y2="250" stroke="rgba(0,0,0,0.08)" stroke-width="1"/>
+                <line x1="50" y1="200" x2="480" y2="200" stroke="rgba(0,0,0,0.04)" stroke-width="1"/>
+                <line x1="50" y1="150" x2="480" y2="150" stroke="rgba(0,0,0,0.04)" stroke-width="1"/>
+                <line x1="50" y1="100" x2="480" y2="100" stroke="rgba(0,0,0,0.04)" stroke-width="1"/>
+                <!-- Area fill -->
+                <path class="chart-area" d="M50,200 L90,180 L130,190 L170,160 L210,170 L250,120 L290,140 L330,100 L370,110 L410,80 L450,90 L450,250 L50,250 Z" fill="url(#chartGrad)"/>
+                <!-- Main line -->
+                <polyline class="chart-line" points="50,200 90,180 130,190 170,160 210,170 250,120 290,140 330,100 370,110 410,80 450,90" fill="none" stroke="url(#lineGrad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+                <!-- Forecast line (dashed) -->
+                <polyline class="chart-forecast" points="370,110 410,80 450,90 480,75" fill="none" stroke="#666666" stroke-width="2" stroke-dasharray="8 4" stroke-linecap="round"/>
+                <!-- Confidence band -->
+                <path class="chart-confidence" d="M370,95 L410,60 L450,70 L480,55 L480,95 L450,110 L410,100 L370,125 Z" fill="#666666" fill-opacity="0.1" stroke="#666666" stroke-opacity="0.3" stroke-width="1"/>
+                <!-- Data points -->
+                <circle cx="250" cy="120" r="5" fill="#1a1a1a" filter="url(#glow)" class="pulse-dot"/>
+                <circle cx="330" cy="100" r="5" fill="#1a1a1a" filter="url(#glow)" class="pulse-dot"/>
+                <!-- Anomaly marker -->
+                <circle cx="170" cy="160" r="7" fill="none" stroke="#999999" stroke-width="2" class="anomaly-ring"/>
+                <circle cx="170" cy="160" r="3" fill="#999999"/>
+                <text x="170" y="148" text-anchor="middle" fill="#999999" font-size="10" font-weight="600">Anomaly</text>
+                <!-- Labels -->
+                <text x="420" y="65" fill="#666666" font-size="10" font-weight="500">Forecast</text>
+                <text x="260" y="270" fill="rgba(0,0,0,0.40)" font-size="11" text-anchor="middle">Time Series Analysis with Multi-Model Ensemble</text>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Key Features -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-card" data-animate>
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 48 48" fill="none"><path d="M24 4L4 14L24 24L44 14L24 4Z" stroke="#1a1a1a" stroke-width="2"/><path d="M4 24L24 34L44 24" stroke="#1a1a1a" stroke-width="2" stroke-dasharray="4 2"/><path d="M4 34L24 44L44 34" stroke="#666666" stroke-width="2"/></svg>
+                    </div>
+                    <h3>LLM-Driven Selection</h3>
+                    <p>Intelligent per-series model selection using statistical profiling. The LLM analyzes 10 features to pick 3-5 optimal models.</p>
+                </div>
+                <div class="feature-card" data-animate>
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 48 48" fill="none"><circle cx="14" cy="14" r="8" stroke="#1a1a1a" stroke-width="2"/><circle cx="34" cy="14" r="8" stroke="#666666" stroke-width="2"/><circle cx="24" cy="32" r="8" stroke="#999999" stroke-width="2"/><line x1="20" y1="18" x2="28" y2="28" stroke="rgba(0,0,0,0.12)" stroke-width="1"/><line x1="28" y1="18" x2="20" y2="28" stroke="rgba(0,0,0,0.12)" stroke-width="1"/></svg>
+                    </div>
+                    <h3>Multi-Model Ensemble</h3>
+                    <p>Parallel execution with consensus voting for anomaly detection and mean averaging for forecasting. No single model dependency.</p>
+                </div>
+                <div class="feature-card" data-animate>
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 48 48" fill="none"><rect x="4" y="8" width="40" height="32" rx="4" stroke="#1a1a1a" stroke-width="2"/><path d="M4 18H44" stroke="#1a1a1a" stroke-width="1.5"/><circle cx="10" cy="13" r="2" fill="#999999"/><circle cx="16" cy="13" r="2" fill="#888888"/><circle cx="22" cy="13" r="2" fill="#1a1a1a"/><path d="M12 28L18 24L24 30L32 22L38 26" stroke="#666666" stroke-width="2" stroke-linecap="round"/></svg>
+                    </div>
+                    <h3>Interactive Web UI</h3>
+                    <p>FastAPI web interface with real-time progress tracking, interactive charts, and natural language query support.</p>
+                </div>
+                <div class="feature-card" data-animate>
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 48 48" fill="none"><path d="M24 4V12" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"/><path d="M24 36V44" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"/><path d="M10 10L16 16" stroke="#666666" stroke-width="2" stroke-linecap="round"/><path d="M32 32L38 38" stroke="#666666" stroke-width="2" stroke-linecap="round"/><circle cx="24" cy="24" r="8" stroke="#1a1a1a" stroke-width="2"/><path d="M21 24L23 26L27 22" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <h3>Council Deliberation</h3>
+                    <p>Karpathy-style 3-stage peer review with 5 expert personas providing multi-perspective analysis and synthesis.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture Section -->
+    <section class="section architecture" id="architecture">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">System Design</span>
+                <h2>Architecture</h2>
+                <p>A production-grade orchestration engine connecting LLMs, foundation models, and statistical methods into a unified analysis platform.</p>
+            </div>
+
+            <!-- Architecture Diagram -->
+            <div class="arch-diagram-wrapper">
+                <svg viewBox="0 0 1000 600" class="arch-diagram" id="archDiagram">
+                    <defs>
+                        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#1a1a1a" stop-opacity="0.2"/>
+                            <stop offset="100%" stop-color="#777777" stop-opacity="0.2"/>
+                        </linearGradient>
+                        <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#1a1a1a"/><stop offset="100%" stop-color="#777777"/>
+                        </linearGradient>
+                        <filter id="shadow">
+                            <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="rgba(0,0,0,0.3)"/>
+                        </filter>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+                            <polygon points="0 0, 10 3.5, 0 7" fill="#1a1a1a" fill-opacity="0.4"/>
+                        </marker>
+                    </defs>
+
+                    <!-- User Input Layer -->
+                    <g class="arch-layer" data-layer="input">
+                        <rect x="370" y="20" width="260" height="60" rx="30" fill="url(#grad1)" stroke="url(#grad2)" stroke-width="1.5" filter="url(#shadow)"/>
+                        <text x="500" y="48" text-anchor="middle" fill="#111111" font-size="13" font-weight="600">Natural Language Query</text>
+                        <text x="500" y="64" text-anchor="middle" fill="rgba(0,0,0,0.50)" font-size="10">"Will sales spike next week?"</text>
+                    </g>
+
+                    <!-- Arrow down -->
+                    <line x1="500" y1="80" x2="500" y2="120" stroke="#1a1a1a" stroke-width="1.5" stroke-opacity="0.5" marker-end="url(#arrowhead)"/>
+
+                    <!-- Orchestrator -->
+                    <g class="arch-layer" data-layer="orchestrator">
+                        <rect x="300" y="120" width="400" height="80" rx="12" fill="rgba(0,0,0,0.03)" stroke="#1a1a1a" stroke-width="1.5" filter="url(#shadow)"/>
+                        <text x="500" y="148" text-anchor="middle" fill="#1a1a1a" font-size="15" font-weight="700">Orchestration Engine</text>
+                        <text x="380" y="175" text-anchor="middle" fill="rgba(0,0,0,0.50)" font-size="10">Tool Selection</text>
+                        <text x="500" y="175" text-anchor="middle" fill="rgba(0,0,0,0.50)" font-size="10">Context Injection</text>
+                        <text x="620" y="175" text-anchor="middle" fill="rgba(0,0,0,0.50)" font-size="10">Result Summary</text>
+                        <!-- small circles as step indicators -->
+                        <circle cx="380" cy="165" r="3" fill="#1a1a1a" fill-opacity="0.5"/>
+                        <circle cx="500" cy="165" r="3" fill="#1a1a1a" fill-opacity="0.7"/>
+                        <circle cx="620" cy="165" r="3" fill="#1a1a1a"/>
+                    </g>
+
+                    <!-- LLM Provider Strip -->
+                    <g class="arch-layer" data-layer="llm">
+                        <rect x="740" y="130" width="230" height="60" rx="10" fill="rgba(0,0,0,0.03)" stroke="#666666" stroke-width="1" filter="url(#shadow)"/>
+                        <text x="855" y="152" text-anchor="middle" fill="#666666" font-size="11" font-weight="600">LLM Providers</text>
+                        <text x="775" y="172" text-anchor="middle" fill="rgba(0,0,0,0.40)" font-size="9">Claude</text>
+                        <text x="820" y="172" text-anchor="middle" fill="rgba(0,0,0,0.40)" font-size="9">Gemini</text>
+                        <text x="865" y="172" text-anchor="middle" fill="rgba(0,0,0,0.40)" font-size="9">GPT</text>
+                        <text x="910" y="172" text-anchor="middle" fill="rgba(0,0,0,0.40)" font-size="9">DeepSeek</text>
+                        <text x="950" y="172" text-anchor="middle" fill="rgba(0,0,0,0.40)" font-size="9">Qwen</text>
+                    </g>
+                    <line x1="700" y1="160" x2="740" y2="160" stroke="#666666" stroke-width="1" stroke-opacity="0.5" marker-end="url(#arrowhead)"/>
+
+                    <!-- Arrows from Orchestrator down to tools -->
+                    <line x1="350" y1="200" x2="160" y2="270" stroke="#1a1a1a" stroke-width="1" stroke-opacity="0.4" marker-end="url(#arrowhead)"/>
+                    <line x1="450" y1="200" x2="390" y2="270" stroke="#1a1a1a" stroke-width="1" stroke-opacity="0.4" marker-end="url(#arrowhead)"/>
+                    <line x1="550" y1="200" x2="610" y2="270" stroke="#1a1a1a" stroke-width="1" stroke-opacity="0.4" marker-end="url(#arrowhead)"/>
+                    <line x1="650" y1="200" x2="830" y2="270" stroke="#1a1a1a" stroke-width="1" stroke-opacity="0.4" marker-end="url(#arrowhead)"/>
+
+                    <!-- Tool Cards Row -->
+                    <!-- Forecasting -->
+                    <g class="arch-layer tool-card" data-layer="forecast">
+                        <rect x="60" y="270" width="200" height="110" rx="10" fill="rgba(0,0,0,0.03)" stroke="#1a1a1a" stroke-width="1" stroke-opacity="0.5"/>
+                        <text x="160" y="295" text-anchor="middle" fill="#1a1a1a" font-size="12" font-weight="600">Forecasting</text>
+                        <text x="160" y="315" text-anchor="middle" fill="rgba(0,0,0,0.50)" font-size="9">Moirai | Chronos | TiRex | TimesFM</text>
+                        <text x="160" y="330" text-anchor="middle" fill="rgba(0,0,0,0.50)" font-size="9">Lag-Llama | LLM | Baseline</text>
+                        <rect x="85" y="345" width="150" height="24" rx="12" fill="rgba(0,0,0,0.04)" stroke="#1a1a1a" stroke-width="0.5"/>
+                        <text x="160" y="361" text-anchor="middle" fill="#1a1a1a" font-size="9">7 Models</text>
+                    </g>
+
+                    <!-- Anomaly Detection -->
+                    <g class="arch-layer tool-card" data-layer="anomaly">
+                        <rect x="290" y="270" width="200" height="110" rx="10" fill="rgba(0,0,0,0.03)" stroke="#999999" stroke-width="1" stroke-opacity="0.5"/>
+                        <text x="390" y="295" text-anchor="middle" fill="#999999" font-size="12" font-weight="600">Anomaly Detection</text>
+                        <text x="390" y="315" text-anchor="middle" fill="rgba(0,0,0,0.50)" font-size="9">Statistical | ML | PyOD</text>
+                        <text x="390" y="330" text-anchor="middle" fill="rgba(0,0,0,0.50)" font-size="9">Merlion | Deep Learning | LLM</text>
+                        <rect x="315" y="345" width="150" height="24" rx="12" fill="rgba(0,0,0,0.04)" stroke="#999999" stroke-width="0.5"/>
+                        <text x="390" y="361" text-anchor="middle" fill="#999999" font-size="9">14 Detectors</text>
+                    </g>
+
+                    <!-- Analysis Tools -->
+                    <g class="arch-layer tool-card" data-layer="tools">
+                        <rect x="510" y="270" width="200" height="110" rx="10" fill="rgba(0,0,0,0.03)" stroke="#888888" stroke-width="1" stroke-opacity="0.5"/>
+                        <text x="610" y="295" text-anchor="middle" fill="#888888" font-size="12" font-weight="600">Analysis Tools</text>
+                        <text x="610" y="315" text-anchor="middle" fill="rgba(0,0,0,0.50)" font-size="9">Decompose | Describe | Compare</text>
+                        <text x="610" y="330" text-anchor="middle" fill="rgba(0,0,0,0.50)" font-size="9">What-If | Context Forecast | Backtest</text>
+                        <rect x="535" y="345" width="150" height="24" rx="12" fill="rgba(0,0,0,0.04)" stroke="#888888" stroke-width="0.5"/>
+                        <text x="610" y="361" text-anchor="middle" fill="#888888" font-size="9">9 Tools</text>
+                    </g>
+
+                    <!-- Council -->
+                    <g class="arch-layer tool-card" data-layer="council">
+                        <rect x="730" y="270" width="200" height="110" rx="10" fill="rgba(0,0,0,0.03)" stroke="#666666" stroke-width="1" stroke-opacity="0.5"/>
+                        <text x="830" y="295" text-anchor="middle" fill="#666666" font-size="12" font-weight="600">Council Mode</text>
+                        <text x="830" y="315" text-anchor="middle" fill="rgba(0,0,0,0.50)" font-size="9">Standard | Simple | Advanced</text>
+                        <text x="830" y="330" text-anchor="middle" fill="rgba(0,0,0,0.50)" font-size="9">3-Stage Peer Review</text>
+                        <rect x="755" y="345" width="150" height="24" rx="12" fill="rgba(0,0,0,0.04)" stroke="#666666" stroke-width="0.5"/>
+                        <text x="830" y="361" text-anchor="middle" fill="#666666" font-size="9">5 Expert Personas</text>
+                    </g>
+
+                    <!-- Model Selection Layer -->
+                    <g class="arch-layer" data-layer="selection">
+                        <rect x="130" y="420" width="740" height="60" rx="10" fill="rgba(0,0,0,0.02)" stroke="rgba(0,0,0,0.12)" stroke-width="1" stroke-dasharray="6 3"/>
+                        <text x="500" y="445" text-anchor="middle" fill="rgba(0,0,0,0.55)" font-size="12" font-weight="600">LLM-Driven Model Selection</text>
+                        <text x="500" y="465" text-anchor="middle" fill="rgba(0,0,0,0.35)" font-size="10">Statistical Profile + Cross-Validation &rarr; LLM Selects 3-5 Models &rarr; Parallel Execution &rarr; Quantile Ensemble</text>
+                    </g>
+
+                    <!-- Arrows down from tools to selection -->
+                    <line x1="160" y1="380" x2="300" y2="420" stroke="#1a1a1a" stroke-width="1" stroke-opacity="0.3"/>
+                    <line x1="390" y1="380" x2="420" y2="420" stroke="#999999" stroke-width="1" stroke-opacity="0.3"/>
+                    <line x1="610" y1="380" x2="580" y2="420" stroke="#888888" stroke-width="1" stroke-opacity="0.3"/>
+                    <line x1="830" y1="380" x2="700" y2="420" stroke="#666666" stroke-width="1" stroke-opacity="0.3"/>
+
+                    <!-- Output Layer -->
+                    <g class="arch-layer" data-layer="output">
+                        <rect x="300" y="520" width="400" height="60" rx="30" fill="url(#grad1)" stroke="url(#grad2)" stroke-width="1.5" filter="url(#shadow)"/>
+                        <text x="500" y="548" text-anchor="middle" fill="#111111" font-size="13" font-weight="600">Intelligent Response</text>
+                        <text x="500" y="564" text-anchor="middle" fill="rgba(0,0,0,0.50)" font-size="10">Predictions + Anomalies + Confidence + Rationale</text>
+                    </g>
+                    <line x1="500" y1="480" x2="500" y2="520" stroke="#1a1a1a" stroke-width="1.5" stroke-opacity="0.5" marker-end="url(#arrowhead)"/>
+
+                    <!-- Interface icons -->
+                    <g class="arch-layer" data-layer="interfaces">
+                        <rect x="30" y="530" width="80" height="40" rx="8" fill="rgba(0,0,0,0.02)" stroke="rgba(0,0,0,0.10)" stroke-width="1"/>
+                        <text x="70" y="545" text-anchor="middle" fill="rgba(0,0,0,0.50)" font-size="9" font-weight="500">CLI</text>
+                        <text x="70" y="558" text-anchor="middle" fill="rgba(0,0,0,0.25)" font-size="8">Terminal</text>
+
+                        <rect x="130" y="530" width="80" height="40" rx="8" fill="rgba(0,0,0,0.02)" stroke="rgba(0,0,0,0.10)" stroke-width="1"/>
+                        <text x="170" y="545" text-anchor="middle" fill="rgba(0,0,0,0.50)" font-size="9" font-weight="500">Web UI</text>
+                        <text x="170" y="558" text-anchor="middle" fill="rgba(0,0,0,0.25)" font-size="8">FastAPI</text>
+
+                        <rect x="790" y="530" width="80" height="40" rx="8" fill="rgba(0,0,0,0.02)" stroke="rgba(0,0,0,0.10)" stroke-width="1"/>
+                        <text x="830" y="545" text-anchor="middle" fill="rgba(0,0,0,0.50)" font-size="9" font-weight="500">Python</text>
+                        <text x="830" y="558" text-anchor="middle" fill="rgba(0,0,0,0.25)" font-size="8">SDK</text>
+
+                        <rect x="890" y="530" width="80" height="40" rx="8" fill="rgba(0,0,0,0.02)" stroke="rgba(0,0,0,0.10)" stroke-width="1"/>
+                        <text x="930" y="545" text-anchor="middle" fill="rgba(0,0,0,0.50)" font-size="9" font-weight="500">Notebook</text>
+                        <text x="930" y="558" text-anchor="middle" fill="rgba(0,0,0,0.25)" font-size="8">Jupyter</text>
+                    </g>
+                </svg>
+            </div>
+
+            <!-- Pipeline Steps -->
+            <div class="pipeline">
+                <h3 class="pipeline-title">How It Works</h3>
+                <div class="pipeline-steps">
+                    <div class="pipeline-step" data-animate>
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Natural Language Input</h4>
+                            <p>Ask questions in plain English. The orchestrator parses intent and selects the right analysis tool.</p>
+                        </div>
+                    </div>
+                    <div class="pipeline-connector"></div>
+                    <div class="pipeline-step" data-animate>
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Series Profiling</h4>
+                            <p>Compute 10 statistical features (mean, std, CV, autocorrelation, skewness, kurtosis) to characterize the data.</p>
+                        </div>
+                    </div>
+                    <div class="pipeline-connector"></div>
+                    <div class="pipeline-step" data-animate>
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Model Selection</h4>
+                            <p>Cross-validation on held-out data computes MAE per model. An LLM reviews performance evidence and selects the optimal model or mixture.</p>
+                        </div>
+                    </div>
+                    <div class="pipeline-connector"></div>
+                    <div class="pipeline-step" data-animate>
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Parallel Execution</h4>
+                            <p>Selected models run concurrently via ThreadPoolExecutor. Each model produces independent predictions.</p>
+                        </div>
+                    </div>
+                    <div class="pipeline-connector"></div>
+                    <div class="pipeline-step" data-animate>
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h4>Ensemble &amp; Response</h4>
+                            <p>Results are aggregated via quantile-aware blending or majority voting, with optional context-aware adjustment. The LLM generates a natural-language explanation.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Models Section -->
+    <section class="section models" id="models">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Model Zoo</span>
+                <h2>Forecasters &amp; Detectors</h2>
+                <p>A comprehensive collection of statistical, ML, deep learning, and foundation models working in concert.</p>
+            </div>
+
+            <!-- Forecasters -->
+            <h3 class="subsection-title">Forecasting Models</h3>
+            <div class="model-grid">
+                <div class="model-card" data-animate>
+                    <div class="model-badge foundation">Foundation</div>
+                    <h4>Moirai</h4>
+                    <span class="model-provider">Salesforce</span>
+                    <p>Universal time series transformer with probabilistic outputs (100 samples). Supports small, base, and large variants.</p>
+                    <div class="model-tags">
+                        <span>Probabilistic</span><span>Zero-shot</span><span>Multi-size</span>
+                    </div>
+                </div>
+                <div class="model-card" data-animate>
+                    <div class="model-badge foundation">Foundation</div>
+                    <h4>Chronos</h4>
+                    <span class="model-provider">Amazon</span>
+                    <p>T5-based architecture excelling at seasonal patterns. GluonTS backend with sizes from tiny to large.</p>
+                    <div class="model-tags">
+                        <span>T5-based</span><span>Seasonal</span><span>5 Sizes</span>
+                    </div>
+                </div>
+                <div class="model-card" data-animate>
+                    <div class="model-badge foundation">Foundation</div>
+                    <h4>TimesFM</h4>
+                    <span class="model-provider">Google</span>
+                    <p>200M parameter decoder-only model optimized for long-horizon forecasting scenarios.</p>
+                    <div class="model-tags">
+                        <span>200M Params</span><span>Long-horizon</span>
+                    </div>
+                </div>
+                <div class="model-card" data-animate>
+                    <div class="model-badge foundation">Foundation</div>
+                    <h4>TiRex</h4>
+                    <span class="model-provider">NX-AI</span>
+                    <p>Foundation model with strong quantile forecasting and context-based prediction. Supports small, base, and large variants.</p>
+                    <div class="model-tags">
+                        <span>Quantile</span><span>Context-aware</span><span>Multi-size</span>
+                    </div>
+                </div>
+                <div class="model-card" data-animate>
+                    <div class="model-badge probabilistic">Probabilistic</div>
+                    <h4>Lag-Llama</h4>
+                    <span class="model-provider">Open Source</span>
+                    <p>Lag-based LLM for time series generating distributional forecasts with uncertainty quantification.</p>
+                    <div class="model-tags">
+                        <span>Uncertainty</span><span>Distributional</span>
+                    </div>
+                </div>
+                <div class="model-card" data-animate>
+                    <div class="model-badge llm">LLM</div>
+                    <h4>LLM Forecaster</h4>
+                    <span class="model-provider">Multi-Provider</span>
+                    <p>Zero-shot forecasting via Claude, GPT, or Gemini numerical reasoning. API-based, no training required.</p>
+                    <div class="model-tags">
+                        <span>Zero-shot</span><span>Explainable</span>
+                    </div>
+                </div>
+                <div class="model-card" data-animate>
+                    <div class="model-badge statistical">Statistical</div>
+                    <h4>Z-Score Baseline</h4>
+                    <span class="model-provider">Built-in</span>
+                    <p>Linear trend extrapolation + rolling mean. Sub-millisecond execution. Serves as universal fallback.</p>
+                    <div class="model-tags">
+                        <span>&lt;1ms</span><span>Fallback</span><span>Always Available</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detectors -->
+            <h3 class="subsection-title">Anomaly Detectors</h3>
+            <div class="detector-categories">
+                <div class="detector-category" data-animate>
+                    <div class="cat-header statistical-bg">
+                        <h4>Statistical</h4>
+                        <span>2 methods</span>
+                    </div>
+                    <div class="cat-body">
+                        <div class="detector-item">
+                            <strong>Z-Score</strong>
+                            <span class="speed">&lt;1ms</span>
+                            <p>Threshold-based on standard deviations</p>
+                        </div>
+                        <div class="detector-item">
+                            <strong>MAD</strong>
+                            <span class="speed">~7ms</span>
+                            <p>Median Absolute Deviation, robust to outliers</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detector-category" data-animate>
+                    <div class="cat-header ml-bg">
+                        <h4>Machine Learning</h4>
+                        <span>2 methods</span>
+                    </div>
+                    <div class="cat-body">
+                        <div class="detector-item">
+                            <strong>Isolation Forest</strong>
+                            <span class="speed">~164ms</span>
+                            <p>Random forest-based isolation of anomalies</p>
+                        </div>
+                        <div class="detector-item">
+                            <strong>LOF</strong>
+                            <span class="speed">~65ms</span>
+                            <p>Local Outlier Factor, density-based detection</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detector-category" data-animate>
+                    <div class="cat-header pyod-bg">
+                        <h4>PyOD Suite</h4>
+                        <span>6 methods</span>
+                    </div>
+                    <div class="cat-body">
+                        <div class="detector-item"><strong>ECOD</strong><span class="speed">~73ms</span><p>Empirical CDF, parameter-free</p></div>
+                        <div class="detector-item"><strong>COPOD</strong><span class="speed">~31ms</span><p>Copula-based, multivariate</p></div>
+                        <div class="detector-item"><strong>HBOS</strong><span class="speed">~39ms</span><p>Histogram-based, very fast</p></div>
+                        <div class="detector-item"><strong>KNN</strong><span class="speed">~171ms</span><p>k-Nearest Neighbors distance</p></div>
+                        <div class="detector-item"><strong>OCSVM</strong><span class="speed">~5.75s</span><p>One-Class SVM kernel boundary</p></div>
+                        <div class="detector-item"><strong>LODA</strong><span class="speed">~81ms</span><p>Random projection ensemble</p></div>
+                    </div>
+                </div>
+
+                <div class="detector-category" data-animate>
+                    <div class="cat-header merlion-bg">
+                        <h4>Merlion (Salesforce)</h4>
+                        <span>3 methods</span>
+                    </div>
+                    <div class="cat-body">
+                        <div class="detector-item"><strong>WindStats</strong><p>Window-based statistical detection</p></div>
+                        <div class="detector-item"><strong>Spectral Residual</strong><p>Frequency-domain residual analysis</p></div>
+                        <div class="detector-item"><strong>Prophet</strong><p>Forecast-based (Meta Prophet)</p></div>
+                    </div>
+                </div>
+
+                <div class="detector-category" data-animate>
+                    <div class="cat-header advanced-bg">
+                        <h4>Advanced</h4>
+                        <span>3 methods</span>
+                    </div>
+                    <div class="cat-body">
+                        <div class="detector-item"><strong>LSTM-VAE</strong><p>LSTM Variational Autoencoder for complex temporal dependencies</p></div>
+                        <div class="detector-item"><strong>Moirai Back-Prediction</strong><p>Foundation model probabilistic confidence-interval scoring</p></div>
+                        <div class="detector-item"><strong>LLM Detector</strong><p>Zero-shot contextual detection with explanations</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Council Section -->
+    <section class="section council" id="council">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Multi-Agent Deliberation</span>
+                <h2>The Council</h2>
+                <p>Inspired by Andrej Karpathy's LLM Council architecture. Multiple AI experts deliberate through a structured 3-stage peer review process.</p>
+            </div>
+
+            <!-- Council Modes -->
+            <div class="council-modes">
+                <div class="council-mode" data-animate>
+                    <div class="mode-header">
+                        <span class="mode-number">Mode 1</span>
+                        <h4>Standard</h4>
+                    </div>
+                    <p>Single LLM analyzes the query, selects tools, and summarizes results. Fast and efficient for straightforward questions.</p>
+                    <div class="mode-visual">
+                        <svg viewBox="0 0 200 60" fill="none">
+                            <rect x="10" y="15" width="50" height="30" rx="6" fill="rgba(0,0,0,0.05)" stroke="#1a1a1a" stroke-width="1"/>
+                            <text x="35" y="34" text-anchor="middle" fill="#1a1a1a" font-size="8">Query</text>
+                            <line x1="60" y1="30" x2="80" y2="30" stroke="#1a1a1a" stroke-width="1" marker-end="url(#arrowhead)"/>
+                            <circle cx="100" cy="30" r="15" fill="rgba(0,0,0,0.04)" stroke="#1a1a1a" stroke-width="1"/>
+                            <text x="100" y="33" text-anchor="middle" fill="#1a1a1a" font-size="7">LLM</text>
+                            <line x1="115" y1="30" x2="135" y2="30" stroke="#1a1a1a" stroke-width="1" marker-end="url(#arrowhead)"/>
+                            <rect x="140" y="15" width="50" height="30" rx="6" fill="rgba(0,0,0,0.05)" stroke="#1a1a1a" stroke-width="1"/>
+                            <text x="165" y="34" text-anchor="middle" fill="#1a1a1a" font-size="8">Result</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="council-mode" data-animate>
+                    <div class="mode-header">
+                        <span class="mode-number">Mode 2</span>
+                        <h4>Simple Council</h4>
+                    </div>
+                    <p>Three specialized roles analyze the same data from different perspectives: Quantitative, Risk, and Business.</p>
+                    <div class="mode-visual">
+                        <svg viewBox="0 0 200 80" fill="none">
+                            <circle cx="100" cy="15" r="10" fill="rgba(0,0,0,0.04)" stroke="#1a1a1a" stroke-width="1"/>
+                            <text x="100" y="18" text-anchor="middle" fill="#1a1a1a" font-size="6">Data</text>
+                            <line x1="90" y1="25" x2="50" y2="45" stroke="rgba(0,0,0,0.12)" stroke-width="1"/>
+                            <line x1="100" y1="25" x2="100" y2="45" stroke="rgba(0,0,0,0.12)" stroke-width="1"/>
+                            <line x1="110" y1="25" x2="150" y2="45" stroke="rgba(0,0,0,0.12)" stroke-width="1"/>
+                            <rect x="25" y="45" width="50" height="25" rx="5" fill="rgba(0,0,0,0.04)" stroke="#1a1a1a" stroke-width="0.8"/>
+                            <text x="50" y="61" text-anchor="middle" fill="#1a1a1a" font-size="6">Quant</text>
+                            <rect x="75" y="45" width="50" height="25" rx="5" fill="rgba(0,0,0,0.04)" stroke="#999999" stroke-width="0.8"/>
+                            <text x="100" y="61" text-anchor="middle" fill="#999999" font-size="6">Risk</text>
+                            <rect x="125" y="45" width="50" height="25" rx="5" fill="rgba(0,0,0,0.04)" stroke="#888888" stroke-width="0.8"/>
+                            <text x="150" y="61" text-anchor="middle" fill="#888888" font-size="6">Business</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="council-mode featured" data-animate>
+                    <div class="mode-header">
+                        <span class="mode-number">Mode 3</span>
+                        <h4>Advanced Council</h4>
+                    </div>
+                    <p>Karpathy-style 3-stage deliberation with 5 expert personas, anonymous peer review, and chairman synthesis.</p>
+                    <div class="mode-visual">
+                        <svg viewBox="0 0 240 100" fill="none">
+                            <!-- Stage 1 -->
+                            <rect x="5" y="5" width="65" height="90" rx="6" fill="rgba(0,0,0,0.02)" stroke="#1a1a1a" stroke-width="0.8"/>
+                            <text x="37" y="18" text-anchor="middle" fill="#1a1a1a" font-size="7" font-weight="600">Stage 1</text>
+                            <text x="37" y="28" text-anchor="middle" fill="rgba(0,0,0,0.40)" font-size="5">First Opinions</text>
+                            <circle cx="20" cy="45" r="6" fill="rgba(0,0,0,0.05)" stroke="#1a1a1a" stroke-width="0.6"/>
+                            <circle cx="37" cy="45" r="6" fill="rgba(0,0,0,0.05)" stroke="#666666" stroke-width="0.6"/>
+                            <circle cx="54" cy="45" r="6" fill="rgba(255,71,87,0.15)" stroke="#999999" stroke-width="0.6"/>
+                            <circle cx="28" cy="65" r="6" fill="rgba(255,215,0,0.15)" stroke="#888888" stroke-width="0.6"/>
+                            <circle cx="46" cy="65" r="6" fill="rgba(0,0,0,0.05)" stroke="#555555" stroke-width="0.6"/>
+                            <text x="37" y="83" text-anchor="middle" fill="rgba(0,0,0,0.25)" font-size="5">5 Experts</text>
+
+                            <!-- Arrow -->
+                            <line x1="72" y1="50" x2="88" y2="50" stroke="#1a1a1a" stroke-width="1" marker-end="url(#arrowhead)"/>
+
+                            <!-- Stage 2 -->
+                            <rect x="90" y="5" width="65" height="90" rx="6" fill="rgba(0,0,0,0.02)" stroke="#666666" stroke-width="0.8"/>
+                            <text x="122" y="18" text-anchor="middle" fill="#666666" font-size="7" font-weight="600">Stage 2</text>
+                            <text x="122" y="28" text-anchor="middle" fill="rgba(0,0,0,0.40)" font-size="5">Peer Review</text>
+                            <text x="122" y="50" text-anchor="middle" fill="rgba(0,0,0,0.25)" font-size="6">Anonymous</text>
+                            <text x="122" y="60" text-anchor="middle" fill="rgba(0,0,0,0.25)" font-size="6">Ranking</text>
+                            <text x="122" y="75" text-anchor="middle" fill="#666666" font-size="6">1-5 Scale</text>
+
+                            <!-- Arrow -->
+                            <line x1="157" y1="50" x2="173" y2="50" stroke="#666666" stroke-width="1" marker-end="url(#arrowhead)"/>
+
+                            <!-- Stage 3 -->
+                            <rect x="175" y="5" width="60" height="90" rx="6" fill="rgba(0,0,0,0.02)" stroke="#888888" stroke-width="0.8"/>
+                            <text x="205" y="18" text-anchor="middle" fill="#888888" font-size="7" font-weight="600">Stage 3</text>
+                            <text x="205" y="28" text-anchor="middle" fill="rgba(0,0,0,0.40)" font-size="5">Synthesis</text>
+                            <circle cx="205" cy="55" r="14" fill="rgba(0,0,0,0.04)" stroke="#888888" stroke-width="1"/>
+                            <text x="205" y="53" text-anchor="middle" fill="#888888" font-size="5" font-weight="600">Chair</text>
+                            <text x="205" y="61" text-anchor="middle" fill="#888888" font-size="5">man</text>
+                            <text x="205" y="83" text-anchor="middle" fill="rgba(0,0,0,0.25)" font-size="5">Final Answer</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Expert Personas -->
+            <h3 class="subsection-title">Expert Personas</h3>
+            <div class="personas-grid">
+                <div class="persona-card" data-animate>
+                    <div class="persona-avatar" style="--accent: #111111">
+                        <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="14" r="8" stroke="#1a1a1a" stroke-width="1.5"/><path d="M6 36c0-8 6-14 14-14s14 6 14 14" stroke="#1a1a1a" stroke-width="1.5"/><text x="20" y="18" text-anchor="middle" fill="#1a1a1a" font-size="10">S</text></svg>
+                    </div>
+                    <h4>Dr. Stats</h4>
+                    <span class="persona-role">Statistician</span>
+                    <p>Statistical significance, confidence intervals, distribution tests, and hypothesis validation.</p>
+                </div>
+                <div class="persona-card" data-animate>
+                    <div class="persona-avatar" style="--accent: #333333">
+                        <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="14" r="8" stroke="#666666" stroke-width="1.5"/><path d="M6 36c0-8 6-14 14-14s14 6 14 14" stroke="#666666" stroke-width="1.5"/><text x="20" y="18" text-anchor="middle" fill="#666666" font-size="10">A</text></svg>
+                    </div>
+                    <h4>Alex</h4>
+                    <span class="persona-role">Domain Expert</span>
+                    <p>Real-world context, historical comparisons, operational insights, and root cause analysis.</p>
+                </div>
+                <div class="persona-card" data-animate>
+                    <div class="persona-avatar" style="--accent: #555555">
+                        <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="14" r="8" stroke="#999999" stroke-width="1.5"/><path d="M6 36c0-8 6-14 14-14s14 6 14 14" stroke="#999999" stroke-width="1.5"/><text x="20" y="18" text-anchor="middle" fill="#999999" font-size="10">M</text></svg>
+                    </div>
+                    <h4>Morgan</h4>
+                    <span class="persona-role">Risk Analyst</span>
+                    <p>Warning signs, worst-case scenarios, volatility assessment, and tail risk evaluation.</p>
+                </div>
+                <div class="persona-card" data-animate>
+                    <div class="persona-avatar" style="--accent: #777777">
+                        <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="14" r="8" stroke="#555555" stroke-width="1.5"/><path d="M6 36c0-8 6-14 14-14s14 6 14 14" stroke="#555555" stroke-width="1.5"/><text x="20" y="18" text-anchor="middle" fill="#555555" font-size="10">J</text></svg>
+                    </div>
+                    <h4>Jordan</h4>
+                    <span class="persona-role">Opportunity Analyst</span>
+                    <p>Positive trends, upside potential, growth signals, and opportunity identification.</p>
+                </div>
+                <div class="persona-card" data-animate>
+                    <div class="persona-avatar" style="--accent: #999999">
+                        <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="14" r="8" stroke="#888888" stroke-width="1.5"/><path d="M6 36c0-8 6-14 14-14s14 6 14 14" stroke="#888888" stroke-width="1.5"/><text x="20" y="18" text-anchor="middle" fill="#888888" font-size="10">S</text></svg>
+                    </div>
+                    <h4>Sam</h4>
+                    <span class="persona-role">Chief Analyst (Chairman)</span>
+                    <p>Synthesis of all viewpoints, weighing consensus and disagreement, clear final recommendations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Phases Timeline -->
+    <section class="section research" id="research">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Research Journey</span>
+                <h2>Four Phases of Innovation</h2>
+                <p>From literature review to production-grade system: a 16-month research journey.</p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-line"></div>
+
+                <div class="timeline-item left" data-animate>
+                    <div class="timeline-dot phase1"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-phase">Phase I</div>
+                        <div class="timeline-date">Aug - Oct 2024</div>
+                        <h3>Literature Review &amp; Research Onboarding</h3>
+                        <ul>
+                            <li>Explored Salesforce Merlion, Moirai, GIFT-Eval, and TimeLLM</li>
+                            <li>Surveyed 200+ slides of techniques across foundation models, causal forecasting, and probabilistic methods</li>
+                            <li>Identified Moirai patch-size limitation as key research direction</li>
+                            <li>Proposed Moirai-Ops zero-shot forecaster for operational data</li>
+                        </ul>
+                        <div class="timeline-outcome">
+                            <strong>Outcome:</strong> Problem formulation and research directions defined
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item right" data-animate>
+                    <div class="timeline-dot phase2"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-phase">Phase II</div>
+                        <div class="timeline-date">Nov 2024 - Jan 2025</div>
+                        <h3>Model Implementation &amp; Preliminary Results</h3>
+                        <ul>
+                            <li>Implemented classical (ARIMA, SARIMA) and transformer-based models</li>
+                            <li>Developed meta-learning prototype: <strong>4-15% improvement</strong> over Moirai baseline</li>
+                            <li>Rolling-based forecasting: <strong>30% better MAE</strong></li>
+                            <li>Stochastic selection analysis: <strong>41.6% potential improvement</strong></li>
+                            <li>Adapted GRPO (Group Relative Policy Optimization) from LLM training</li>
+                        </ul>
+                        <div class="timeline-outcome">
+                            <strong>Key Metrics:</strong> 4-15% meta-learning improvement, 30% MAE via rolling context
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item left" data-animate>
+                    <div class="timeline-dot phase3"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-phase">Phase III</div>
+                        <div class="timeline-date">Feb - Apr 2025</div>
+                        <h3>Advanced Frameworks &amp; Research Paper</h3>
+                        <ul>
+                            <li><strong>Tune-as-Inference</strong>: Amortized configuration learning using LightGBM learning-to-rank for per-series context length and patch size selection</li>
+                            <li><strong>7.6% MAE improvement</strong> on Uber TLC, <strong>8.0%</strong> on Electricity &mdash; within 3-5% of 20-trial Bayesian optimization at 20x lower cost</li>
+                            <li><strong>Peak Multiplier Method</strong>: 100% anomaly recall with 96.5% false-positive reduction</li>
+                            <li>Validated on Moirai 1.1-R-small and PatchTST (model-agnostic)</li>
+                            <li>Paper accepted at ICLR 2026 TSALM Workshop</li>
+                        </ul>
+                        <div class="timeline-outcome">
+                            <strong>Publication:</strong> <a href="https://openreview.net/forum?id=LycMKa0o0b" target="_blank" style="color: inherit;">"Tune-as-Inference: Amortized Configuration Learning for Time Series Foundation Models"</a> &mdash; Accepted at ICLR 2026 TSALM Workshop
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item right" data-animate>
+                    <div class="timeline-dot phase4"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-phase">Phase IV</div>
+                        <div class="timeline-date">May 2025 - Present</div>
+                        <h3>Time Series Council: Research to Production</h3>
+                        <ul>
+                            <li>Synthesized all phases into ~19,264 lines of production Python</li>
+                            <li>Tune-as-Inference insight evolved into LLM-driven model selection</li>
+                            <li>Integrated 7 forecasters, 14 detectors, 5 LLM providers</li>
+                            <li>Karpathy-style 3-stage council deliberation</li>
+                        </ul>
+                        <div class="timeline-outcome">
+                            <strong>Delivery:</strong> Production-grade Time Series Council system for AIOps
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tune-as-Inference Spotlight -->
+            <div class="spotlight" data-animate>
+                <div class="spotlight-header">
+                    <h3>Tune-as-Inference: Core Research Contribution</h3>
+                    <span class="paper-badge"><a href="https://openreview.net/forum?id=LycMKa0o0b" target="_blank" style="color: inherit; text-decoration: none;">Accepted &mdash; ICLR 2026 TSALM Workshop</a></span>
+                </div>
+                <p style="margin: 1rem 32px 1.5rem; color: rgba(0,0,0,0.55); font-size: 0.95rem;">
+                    <em>Tune-as-Inference: Amortized Configuration Learning for Time Series Foundation Models</em>
+                    &mdash; reformulates hyperparameter tuning as a single inference step using a lightweight learning-to-rank meta-learner.
+                </p>
+                <div class="spotlight-content">
+                    <div class="spotlight-diagram">
+                        <svg viewBox="0 0 500 200" fill="none" class="meta-diagram">
+                            <!-- Offline Phase -->
+                            <rect x="10" y="10" width="230" height="180" rx="10" fill="rgba(0,0,0,0.02)" stroke="#1a1a1a" stroke-width="1" stroke-opacity="0.4"/>
+                            <text x="125" y="30" text-anchor="middle" fill="#1a1a1a" font-size="11" font-weight="600">Offline Phase</text>
+
+                            <rect x="25" y="45" width="90" height="35" rx="6" fill="rgba(0,0,0,0.04)" stroke="#1a1a1a" stroke-width="0.8"/>
+                            <text x="70" y="60" text-anchor="middle" fill="rgba(0,0,0,0.55)" font-size="8">Performance</text>
+                            <text x="70" y="72" text-anchor="middle" fill="rgba(0,0,0,0.55)" font-size="8">Profiling (35 configs)</text>
+
+                            <rect x="135" y="45" width="90" height="35" rx="6" fill="rgba(0,0,0,0.04)" stroke="#1a1a1a" stroke-width="0.8"/>
+                            <text x="180" y="60" text-anchor="middle" fill="rgba(0,0,0,0.55)" font-size="8">TSFresh</text>
+                            <text x="180" y="72" text-anchor="middle" fill="rgba(0,0,0,0.55)" font-size="8">Meta-Features</text>
+
+                            <line x1="70" y1="80" x2="125" y2="105" stroke="rgba(0,0,0,0.15)" stroke-width="1"/>
+                            <line x1="180" y1="80" x2="125" y2="105" stroke="rgba(0,0,0,0.15)" stroke-width="1"/>
+
+                            <rect x="60" y="105" width="130" height="40" rx="8" fill="rgba(0,0,0,0.05)" stroke="#1a1a1a" stroke-width="1"/>
+                            <text x="125" y="122" text-anchor="middle" fill="#1a1a1a" font-size="9" font-weight="500">LightGBM</text>
+                            <text x="125" y="136" text-anchor="middle" fill="#1a1a1a" font-size="8">Learning-to-Rank</text>
+
+                            <text x="125" y="170" text-anchor="middle" fill="rgba(0,0,0,0.25)" font-size="7">Rank Prediction via MSE</text>
+
+                            <!-- Arrow between phases -->
+                            <line x1="245" y1="100" x2="265" y2="100" stroke="url(#grad2)" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+                            <!-- Online Phase -->
+                            <rect x="270" y="10" width="220" height="180" rx="10" fill="rgba(123,47,247,0.04)" stroke="#666666" stroke-width="1" stroke-opacity="0.4"/>
+                            <text x="380" y="30" text-anchor="middle" fill="#666666" font-size="11" font-weight="600">Online Phase</text>
+
+                            <rect x="290" y="45" width="90" height="35" rx="6" fill="rgba(0,0,0,0.04)" stroke="#666666" stroke-width="0.8"/>
+                            <text x="335" y="60" text-anchor="middle" fill="rgba(0,0,0,0.55)" font-size="8">New Series</text>
+                            <text x="335" y="72" text-anchor="middle" fill="rgba(0,0,0,0.55)" font-size="8">Meta-Features</text>
+
+                            <line x1="335" y1="80" x2="380" y2="105" stroke="rgba(0,0,0,0.15)" stroke-width="1"/>
+
+                            <rect x="320" y="105" width="120" height="40" rx="8" fill="rgba(0,0,0,0.05)" stroke="#666666" stroke-width="1"/>
+                            <text x="380" y="122" text-anchor="middle" fill="#666666" font-size="9" font-weight="500">Predict Ranks</text>
+                            <text x="380" y="136" text-anchor="middle" fill="#666666" font-size="8">Select Best Config</text>
+
+                            <text x="380" y="170" text-anchor="middle" fill="rgba(0,0,0,0.25)" font-size="7">Single inference step (no search)</text>
+                        </svg>
+                    </div>
+                    <div class="spotlight-results">
+                        <p class="result-note">Validated on Moirai and PatchTST (model-agnostic). Converts hyperparameter tuning into a single inference step.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AIOps Benefits -->
+    <section class="section benefits" id="benefits">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Impact</span>
+                <h2>Benefits to AIOps</h2>
+                <p>How Time Series Council transforms operational intelligence at scale.</p>
+            </div>
+
+            <div class="benefits-grid">
+                <div class="benefit-card" data-animate>
+                    <div class="benefit-number">01</div>
+                    <h3>Intelligent Anomaly Detection</h3>
+                    <p>14 detector methods with LLM-driven per-metric selection eliminate manual tuning. Consensus voting with confidence scoring (high: 75%+, medium: 50%+) drastically reduces false positives.</p>
+                </div>
+                <div class="benefit-card" data-animate>
+                    <div class="benefit-number">02</div>
+                    <h3>Capacity Forecasting</h3>
+                    <p>7 forecasting models producing probabilistic outputs with confidence intervals. Quantile-aware ensemble blending and cross-validation-based selection improve accuracy by 21-28% over individual models.</p>
+                </div>
+                <div class="benefit-card" data-animate>
+                    <div class="benefit-number">03</div>
+                    <h3>Full Interpretability</h3>
+                    <p>Council mode provides quantitative, risk, and business perspectives. Every model selection decision comes with LLM-generated rationale. Per-model results preserved for drill-down.</p>
+                </div>
+                <div class="benefit-card" data-animate>
+                    <div class="benefit-number">04</div>
+                    <h3>Multi-Interface Operations</h3>
+                    <p>CLI for scripting, FastAPI web UI for interactive analysis, Python API for automation, and Jupyter notebooks for exploration. 5 LLM providers ensure no vendor lock-in.</p>
+                </div>
+                <div class="benefit-card" data-animate>
+                    <div class="benefit-number">05</div>
+                    <h3>Salesforce Ecosystem Integration</h3>
+                    <p>Incorporates Salesforce Merlion detectors and Moirai foundation models. Designed as baseline for Seamless Detection, tested on real CRM operational data.</p>
+                </div>
+                <div class="benefit-card" data-animate>
+                    <div class="benefit-number">06</div>
+                    <h3>Graceful Degradation</h3>
+                    <p>Optional dependencies degrade silently. Individual model failures don't crash the ensemble. LLM selection failures fall back to curated priority lists. Always produces a result.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="section team" id="team">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Collaboration</span>
+                <h2>Research Team</h2>
+                <p>A joint initiative between Salesforce Warden AIOps and IIIT Hyderabad.</p>
+            </div>
+
+            <div class="team-grid">
+                <div class="team-card" data-animate>
+                    <div class="team-avatar">
+                        <svg viewBox="0 0 60 60" fill="none"><circle cx="30" cy="22" r="12" stroke="#1a1a1a" stroke-width="1.5"/><path d="M8 55c0-12 10-22 22-22s22 10 22 22" stroke="#1a1a1a" stroke-width="1.5"/><text x="30" y="27" text-anchor="middle" fill="#1a1a1a" font-size="14">VP</text></svg>
+                    </div>
+                    <h4>Prof. Vikram Puri</h4>
+                    <span class="team-role">IIIT Research Lead</span>
+                    <span class="team-affiliation">IIIT Hyderabad</span>
+                </div>
+                <div class="team-card" data-animate>
+                    <div class="team-avatar">
+                        <svg viewBox="0 0 60 60" fill="none"><circle cx="30" cy="22" r="12" stroke="#555555" stroke-width="1.5"/><path d="M8 55c0-12 10-22 22-22s22 10 22 22" stroke="#555555" stroke-width="1.5"/><text x="30" y="27" text-anchor="middle" fill="#555555" font-size="14">PG</text></svg>
+                    </div>
+                    <h4>Piyush Gupta</h4>
+                    <span class="team-role">IIIT Researcher</span>
+                    <span class="team-affiliation">IIIT Hyderabad</span>
+                </div>
+                <div class="team-card" data-animate>
+                    <div class="team-avatar">
+                        <svg viewBox="0 0 60 60" fill="none"><circle cx="30" cy="22" r="12" stroke="#777777" stroke-width="1.5"/><path d="M8 55c0-12 10-22 22-22s22 10 22 22" stroke="#777777" stroke-width="1.5"/><text x="30" y="27" text-anchor="middle" fill="#777777" font-size="14">ST</text></svg>
+                    </div>
+                    <h4>Sriteja</h4>
+                    <span class="team-role">IIIT Researcher</span>
+                    <span class="team-affiliation">IIIT Hyderabad</span>
+                </div>
+                <div class="team-card" data-animate>
+                    <div class="team-avatar">
+                        <svg viewBox="0 0 60 60" fill="none"><circle cx="30" cy="22" r="12" stroke="#888888" stroke-width="1.5"/><path d="M8 55c0-12 10-22 22-22s22 10 22 22" stroke="#888888" stroke-width="1.5"/><text x="30" y="27" text-anchor="middle" fill="#888888" font-size="14">T</text></svg>
+                    </div>
+                    <h4>Tanay</h4>
+                    <span class="team-role">IIIT Researcher</span>
+                    <span class="team-affiliation">IIIT Hyderabad</span>
+                </div>
+                <div class="team-card" data-animate>
+                    <div class="team-avatar">
+                        <svg viewBox="0 0 60 60" fill="none"><circle cx="30" cy="22" r="12" stroke="#999999" stroke-width="1.5"/><path d="M8 55c0-12 10-22 22-22s22 10 22 22" stroke="#999999" stroke-width="1.5"/><text x="30" y="27" text-anchor="middle" fill="#999999" font-size="14">A</text></svg>
+                    </div>
+                    <h4>Annamalai</h4>
+                    <span class="team-role">IIIT Researcher</span>
+                    <span class="team-affiliation">IIIT Hyderabad</span>
+                </div>
+                <div class="team-card" data-animate>
+                    <div class="team-avatar">
+                        <svg viewBox="0 0 60 60" fill="none"><circle cx="30" cy="22" r="12" stroke="#444444" stroke-width="1.5"/><path d="M8 55c0-12 10-22 22-22s22 10 22 22" stroke="#444444" stroke-width="1.5"/><text x="30" y="27" text-anchor="middle" fill="#444444" font-size="14">DS</text></svg>
+                    </div>
+                    <h4>Doyen Sahoo</h4>
+                    <span class="team-role">Salesforce AI</span>
+                    <span class="team-affiliation">Salesforce</span>
+                </div>
+                <div class="team-card" data-animate>
+                    <div class="team-avatar">
+                        <svg viewBox="0 0 60 60" fill="none"><circle cx="30" cy="22" r="12" stroke="#666666" stroke-width="1.5"/><path d="M8 55c0-12 10-22 22-22s22 10 22 22" stroke="#666666" stroke-width="1.5"/><text x="30" y="27" text-anchor="middle" fill="#666666" font-size="14">MS</text></svg>
+                    </div>
+                    <h4>Manpreet Singh</h4>
+                    <span class="team-role">Salesforce Warden AIOps</span>
+                    <span class="team-affiliation">Salesforce</span>
+                </div>
+                <div class="team-card" data-animate>
+                    <div class="team-avatar">
+                        <svg viewBox="0 0 60 60" fill="none"><circle cx="30" cy="22" r="12" stroke="#444444" stroke-width="1.5"/><path d="M8 55c0-12 10-22 22-22s22 10 22 22" stroke="#444444" stroke-width="1.5"/><text x="30" y="27" text-anchor="middle" fill="#444444" font-size="14">LV</text></svg>
+                    </div>
+                    <h4>Laksh Venka</h4>
+                    <span class="team-role">VP Salesforce</span>
+                    <span class="team-affiliation">Salesforce</span>
+                </div>
+                <div class="team-card" data-animate>
+                    <div class="team-avatar">
+                        <svg viewBox="0 0 60 60" fill="none"><circle cx="30" cy="22" r="12" stroke="#333333" stroke-width="1.5"/><path d="M8 55c0-12 10-22 22-22s22 10 22 22" stroke="#333333" stroke-width="1.5"/><text x="30" y="27" text-anchor="middle" fill="#333333" font-size="14">KK</text></svg>
+                    </div>
+                    <h4>Kiran Kishore</h4>
+                    <span class="team-role">Senior Program Manager</span>
+                    <span class="team-affiliation">Salesforce</span>
+                </div>
+                <div class="team-card" data-animate>
+                    <div class="team-avatar">
+                        <svg viewBox="0 0 60 60" fill="none"><circle cx="30" cy="22" r="12" stroke="#333333" stroke-width="1.5"/><path d="M8 55c0-12 10-22 22-22s22 10 22 22" stroke="#333333" stroke-width="1.5"/><text x="30" y="27" text-anchor="middle" fill="#333333" font-size="14">SD</text></svg>
+                    </div>
+                    <h4>Sriram Dinavahi</h4>
+                    <span class="team-role">SVP Salesforce</span>
+                    <span class="team-affiliation">Salesforce</span>
+                </div>
+            </div>
+
+            <!-- Logos -->
+            <div class="partner-logos">
+                <div class="logo-card">
+                    <span class="logo-text salesforce">salesforce</span>
+                    <span class="logo-sub">Warden AIOps</span>
+                </div>
+                <div class="logo-divider">x</div>
+                <div class="logo-card">
+                    <span class="logo-text iiit">IIIT-H</span>
+                    <span class="logo-sub">Hyderabad</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Start -->
+    <section class="section quickstart" id="quickstart">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Get Started</span>
+                <h2>Quick Start</h2>
+            </div>
+            <div class="code-blocks">
+                <div class="code-block" data-animate>
+                    <div class="code-header">
+                        <span class="code-dot red"></span>
+                        <span class="code-dot yellow"></span>
+                        <span class="code-dot green"></span>
+                        <span class="code-title">Installation</span>
+                    </div>
+                    <pre><code><span class="comment"># Install with all dependencies</span>
+<span class="cmd">pip install</span> timeseries-council[all]
+
+<span class="comment"># Download model weights</span>
+<span class="cmd">timeseries-council</span> download-models
+
+<span class="comment"># Check status</span>
+<span class="cmd">timeseries-council</span> status</code></pre>
+                </div>
+                <div class="code-block" data-animate>
+                    <div class="code-header">
+                        <span class="code-dot red"></span>
+                        <span class="code-dot yellow"></span>
+                        <span class="code-dot green"></span>
+                        <span class="code-title">CLI Usage</span>
+                    </div>
+                    <pre><code><span class="comment"># Interactive chat with your data</span>
+<span class="cmd">timeseries-council</span> chat data.csv \
+  --target sales \
+  --provider anthropic
+
+<span class="comment"># Launch web interface</span>
+<span class="cmd">timeseries-council</span> serve \
+  --host 0.0.0.0 --port 8000</code></pre>
+                </div>
+                <div class="code-block" data-animate>
+                    <div class="code-header">
+                        <span class="code-dot red"></span>
+                        <span class="code-dot yellow"></span>
+                        <span class="code-dot green"></span>
+                        <span class="code-title">Python API</span>
+                    </div>
+                    <pre><code><span class="keyword">from</span> timeseries_council <span class="keyword">import</span> Orchestrator
+
+orchestrator = Orchestrator(
+    csv_path=<span class="string">"data.csv"</span>,
+    target_col=<span class="string">"sales"</span>,
+    provider=<span class="string">"anthropic"</span>
+)
+
+result = orchestrator.chat(
+    <span class="string">"Will sales spike next week?"</span>
+)
+<span class="builtin">print</span>(result.response)</code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <svg width="24" height="24" viewBox="0 0 28 28" fill="none">
+                        <circle cx="14" cy="14" r="13" stroke="url(#footerGrad)" stroke-width="2"/>
+                        <path d="M7 18L11 10L15 15L19 8L22 12" stroke="url(#footerGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <defs><linearGradient id="footerGrad" x1="0" y1="0" x2="28" y2="28"><stop stop-color="#1a1a1a"/><stop offset="1" stop-color="#777777"/></linearGradient></defs>
+                    </svg>
+                    <span>Time Series Council</span>
+                </div>
+                <p class="footer-text">
+                    Warden AIOps Research Project | Salesforce x IIIT-Hyderabad | 2024-2026
+                </p>
+                <div class="footer-links">
+                    <a href="#architecture">Architecture</a>
+                    <a href="#models">Models</a>
+                    <a href="#research">Research</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+# Time Series Council Configuration
+# ----------------------
+# Configure your LLM providers and API keys here.
+# API keys can be set via environment variables (recommended) or directly in this file.
+
+# Default provider for all operations
+default_provider: anthropic
+
+# Provider configurations
+# Each provider needs an API key (via env var or direct value)
+providers:
+  gemini:
+    api_key_env: GEMINI_API_KEY # Environment variable name
+    # api_key: your-key-here          
+    model: gemini-2.5-flash
+
+  anthropic:
+    api_key_env: ANTHROPIC_API_KEY
+    # api_key: 
+    model: claude-sonnet-4-20250514
+
+  openai:
+    api_key_env: OPENAI_API_KEY
+    model: gpt-4o-mini
+
+  deepseek:
+    api_key_env: DEEPSEEK_API_KEY
+    model: deepseek-chat
+    # base_url: https://api.deepseek.com  # Optional custom endpoint
+
+  qwen:
+    api_key_env: DASHSCOPE_API_KEY
+    model: qwen-turbo
+    base_url: https://dashscope.aliyuncs.com/compatible-mode/v1
+
+# Council of AI configuration
+# The council provides multi-perspective analysis using 3 AI roles
+council:
+  # Option 1: Use the same provider for all council roles (simpler)
+  use_same_provider: true
+  provider: anthropic # Used when use_same_provider is true
+
+  # Option 2: Use different providers for each role (more diverse perspectives)
+  # Set use_same_provider to false and configure roles below
+  # use_same_provider: false
+  # roles:
+  #   forecaster: gemini         # Quantitative analysis
+  #   risk_analyst: anthropic    # Risk assessment
+  #   business_explainer: openai # Business insights
+
+# Advanced Council (Karpathy-style 3-stage deliberation)
+# Stage 1: All models give first opinions
+# Stage 2: Models review and rank each other's responses
+# Stage 3: Chairman synthesizes final answer
+advanced_council:
+  enabled: true
+  chairman: anthropic # Model that synthesizes final answer
+
+  # Models participating in the council (need API keys configured above)
+  # At minimum, configure 2+ models for meaningful deliberation
+  models:
+    - anthropic
+    # - gemini    # Uncomment and add API key to use
+    # - openai    # Uncomment and add API key to use
+    # - deepseek  # Uncomment and add API key to use
+
+# Cross-validation-based model selection
+# Uses held-out validation data to compare models before LLM selection
+cross_validation:
+  enabled: true
+  cv_points: null  # Number of validation points (null = auto, typically = horizon)
+  diversity_threshold: 0.01  # Skip LLM selection when models agree within this threshold
+  max_downsample: 40  # Max points to include in LLM prompt (for token efficiency)
+  selection_method: "auto"  # "auto", "cv", "llm", "static"
+
+# Quantile-aware ensemble blending
+# Blends at the quantile level instead of just averaging point forecasts
+quantile_ensemble:
+  enabled: true
+  standard_quantiles: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
+
+# Web server settings
+server:
+  host: 127.0.0.1
+  port: 8000
+
+# Default data settings
+data:
+  default_csv: data/sample_sales.csv
+  default_target: sales

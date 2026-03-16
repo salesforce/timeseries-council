@@ -1,0 +1,73 @@
+Timeseries Council
+Copyright (c) 2026, Salesforce, Inc.
+Licensed under the Apache License, Version 2.0.
+
+This project includes code and/or depends on the following third-party libraries:
+
+---
+
+Lag-Llama
+Copyright 2024 Arjun Ashok
+Licensed under the Apache License, Version 2.0
+https://github.com/time-series-foundation-models/lag-llama
+
+Source files under src/lag_llama/ are derived from the Lag-Llama project.
+
+---
+
+GluonTS
+Copyright Amazon.com, Inc. or its affiliates
+Licensed under the Apache License, Version 2.0
+https://github.com/awslabs/gluonts
+
+Used for dataset infrastructure, time series data loading, and distribution utilities.
+
+---
+
+Amazon Chronos
+Copyright Amazon.com, Inc. or its affiliates
+Licensed under the Apache License, Version 2.0
+https://github.com/amazon-science/chronos-forecasting
+
+Used as a foundation model for time series forecasting.
+
+---
+
+Salesforce Merlion
+Copyright (c) Salesforce, Inc.
+Licensed under the BSD 3-Clause License
+https://github.com/salesforce/Merlion
+
+Used for anomaly detection (WindStats, Spectral Residual, Prophet, Isolation Forest).
+
+---
+
+Uni2TS / Moirai
+Copyright (c) Salesforce, Inc.
+Licensed under the Apache License, Version 2.0
+https://github.com/SalesforceAIResearch/uni2ts
+
+Used as a foundation model for time series forecasting and anomaly detection.
+
+---
+
+Google TimesFM
+Copyright Google LLC
+Licensed under the Apache License, Version 2.0
+https://github.com/google-research/timesfm
+
+Used as a foundation model for time series forecasting.
+
+---
+
+Additional dependencies (installed via pip):
+
+- PyTorch (https://pytorch.org/) - BSD-style License
+- Hugging Face Transformers (https://github.com/huggingface/transformers) - Apache 2.0
+- pandas (https://pandas.pydata.org/) - BSD 3-Clause
+- NumPy (https://numpy.org/) - BSD 3-Clause
+- scikit-learn (https://scikit-learn.org/) - BSD 3-Clause
+- statsmodels (https://www.statsmodels.org/) - BSD 3-Clause
+- PyOD (https://github.com/yzhao062/pyod) - BSD 2-Clause
+- FastAPI (https://fastapi.tiangolo.com/) - MIT
+- Jinja2 (https://palletsprojects.com/p/jinja/) - BSD 3-Clause

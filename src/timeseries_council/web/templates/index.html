@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Series Council - AI Analysis</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/vue-components.css">
+    
+    <!-- Theme Initialization (before page render to prevent flash) -->
+    <script>
+        // Load saved theme or default to light
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+
+</head>
+<body>
+    <div id="app">
+        <!-- Vue.js will mount here -->
+        <div class="loading-screen">
+            <div class="loading-spinner"></div>
+            <p>Loading Time Series Council...</p>
+        </div>
+    </div>
+
+    <!-- Marked.js for Markdown rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <!-- Vue.js 3 (CDN) -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    
+    <!-- Plotly.js for charts -->
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+
+    <!-- Vue Components -->
+    <script src="/static/js/components/FileUploader.js"></script>
+    <script src="/static/js/components/ModeSelector.js"></script>
+    <script src="/static/js/components/ThinkingView.js"></script>
+    <script src="/static/js/components/CouncilView.js"></script>
+    <script src="/static/js/components/TimeSeriesChart.js"></script>
+    <script src="/static/js/components/LandingPage.js"></script>
+    <script src="/static/js/components/ChatInterface.js"></script>
+
+    <!-- Main App -->
+    <script src="/static/js/vue-app.js"></script>
+</body>
+</html>
